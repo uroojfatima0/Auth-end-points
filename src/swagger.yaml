@@ -1,0 +1,160 @@
+openapi: 3.0.0
+info:
+  title: Auth API
+  description: API documentation for the Authentication service.
+  version: 1.0.0
+
+paths:
+  /signup:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@gmail.com
+                username:
+                  type: string
+                  example: johndoe
+                password:
+                  type: string
+                  example: securepassword
+      responses:
+        '200':
+          description: User successfully registered
+        '400':
+          description: Bad Request
+          
+  /login:
+    post:
+      summary: Log in a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+                password:
+                  type: string
+                  example: securepassword
+      responses:
+        '200':
+          description: Login successful
+        '400':
+          description: Invalid username or password
+
+  /forgot-password:
+    post:
+      summary: Request password reset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+      responses:
+        '200':
+          description: Reset link sent successfully
+        '400':
+          description: User not found
+
+  /reset-password:
+    post:
+      summary: Reset user password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: abc123reset
+                newPassword:
+                  type: string
+                  example: newsecurepassword
+      responses:
+        '200':
+          description: Password successfully reset
+        '400':
+          description: Invalid or expired token
+
+  /change-password:
+    post:
+      summary: Change user's password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+                currentPassword:
+                  type: string
+                  example: oldpassword
+                newPassword:
+                  type: string
+                  example: newsecurepassword
+      responses:
+        '200':
+          description: Password changed successfully
+        '400':
+          description: Error updating password
+
+  /requestOTP:
+    post:
+      summary: Request OTP for email verification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@gmail.com
+      responses:
+        '200':
+          description: OTP sent successfully
+        '400':
+          description: Error sending OTP
+
+  /verifyOTP:
+    post:
+      summary: Verify OTP for email verification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@gmail.com
+                otp:
+                  type: string
+                  example: 1234
+      responses:
+        '200':
+          description: OTP verified successfully
+        '400':
+          description: Invalid or expired OTP
