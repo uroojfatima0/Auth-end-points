@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const connect = mongoose.connect("mongodb+srv://urooj12186:_arooj123@cluster0.g4mjn.mongodb.net/CineHub");
+const connect = mongoose.connect("mongodb+srv://user_name:mogo_password@mongo_db_name");
 
 connect.then (() => {
     console.log("Database Connected Successfully");
